@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string name="app_name">Navaroni</string>
+   <item type="string" name="databaseVersion" format="integer">1</item>
+
+ <string name="search">Search</string>
+ <string name="help">Help</string>
+   <string name="mystring">    
+        You can use regular text, and escaped HTML markup
+        &lt;br /&gt;
+	* test &lt;br /&gt;
+	* test &lt;br /&gt;
+        A simple BOLD example &lt;b&gt;StackOverflow&lt;/b&gt;.
+    </string>
+
+</resources>

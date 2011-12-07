@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+ant debug && adb install -r bin/SNavi-debug.apk 
+
+
+
