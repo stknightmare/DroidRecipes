@@ -1,13 +1,12 @@
-/home/programming/androids/snavi/bin/classes.dex : \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/SNavi$2.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R$layout.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R$menu.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R$id.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/SNavi$1.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R$attr.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/SNavi.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R$string.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/DataBaseHelper.class \
-/home/programming/androids/snavi/bin/classes/navarino/snavi/R$drawable.class \
-/home/programming/androids/snavi/bin/classes/DataBaseHelper.class \
+/home/programming/android/DroidRecipesProject/bin/classes.dex : \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R$string.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/DataBaseHelper.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R$layout.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R$menu.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/DroidRecipes$2.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/DroidRecipes.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R$id.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R$drawable.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/DroidRecipes$1.class \
+/home/programming/android/DroidRecipesProject/bin/classes/extreme/droid/recipes/R$attr.class \

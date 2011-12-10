@@ -7,3 +7,4 @@
         android:title="Icon and text"
         android:icon="@drawable/icon" />
 </menu>
+

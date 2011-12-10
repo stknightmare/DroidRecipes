@@ -1,4 +1,4 @@
-package navarino.snavi;
+package extreme.droid.recipes;
 
 import android.content.ContentValues;
 import android.content.Context;

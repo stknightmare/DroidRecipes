@@ -1,5 +1,5 @@
-package navarino.snavi;
- 
+package extreme.droid.recipes;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -38,7 +38,8 @@ import android.view.View.OnClickListener;
 import 	android.widget.Button;
 import java.lang.String;
 
-public class SNavi extends Activity {
+public class DroidRecipes extends Activity
+{
 
 //////////////////////////
 	public Button searchTextBtn;
@@ -110,7 +111,7 @@ edittext.setOnKeyListener(new OnKeyListener() {
         if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
             (keyCode == KeyEvent.KEYCODE_ENTER)) {
           // Perform action on key press
-          Toast.makeText(SNavi.this, edittext.getText(), Toast.LENGTH_SHORT).show();
+          Toast.makeText(DroidRecipes.this, edittext.getText(), Toast.LENGTH_SHORT).show();
           return true;
         }
         return false;
@@ -120,7 +121,7 @@ edittext.setOnKeyListener(new OnKeyListener() {
 
 searchTextBtn.setOnClickListener(new OnClickListener() { public void onClick (View v){ 
 
-	Toast.makeText(SNavi.this, "You pressed the Search button!"+edittext.getText().toString(), Toast.LENGTH_LONG).show();
+	Toast.makeText(DroidRecipes.this, "You pressed the Search button!"+edittext.getText().toString(), Toast.LENGTH_LONG).show();
 
 	String x = "55";
 
@@ -180,8 +181,3 @@ searchTextBtn.setOnClickListener(new OnClickListener() { public void onClick (Vi
 
 */
 }
-
-
-
-
-
