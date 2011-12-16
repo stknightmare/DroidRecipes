@@ -93,8 +93,8 @@ public class DroidRecipes extends Activity
 			    public void onItemClick(AdapterView<?> arg0, View view,
 				    int position, long id) {
 
-				Toast.makeText(getApplicationContext(), "You pressed the icon and text!"+id, Toast.LENGTH_LONG).show();
-
+				
+				toastTxt("You pressed the icon and text!"+id);
 				Cursor cur = (Cursor) adapter.getItem(position);
 
 				String selected_id = cur.getString(cur.getColumnIndex("_id"));
@@ -111,8 +111,8 @@ public class DroidRecipes extends Activity
 			    @Override
 			    public void onItemClick(AdapterView<?> arg0, View view,
 				    int position, long id) {
-
-				Toast.makeText(getApplicationContext(), "Position "+id+" "+position, Toast.LENGTH_LONG).show();
+				toastTxt("Position "+id+" "+position);
+				
 				
 			    }   
 			}       
@@ -127,7 +127,7 @@ public class DroidRecipes extends Activity
 			    (keyCode == KeyEvent.KEYCODE_ENTER)) {
 			  // Perform action on key press
 				String txt =  edittext.getText().toString();
-			  Toast.makeText(DroidRecipes.this, txt, Toast.LENGTH_SHORT).show();
+				toastTxt(txt);
 				loadHtmlData(txt);
 			  return true;
 			}
@@ -144,6 +144,10 @@ public class DroidRecipes extends Activity
 
 ////////////////////////////////////////////////////////////////////////////////////////
     }
+
+	public void toastTxt(String txt) {
+		Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
+	}
 
 	public void loadHtmlData(String info) {
 
@@ -166,15 +170,15 @@ public class DroidRecipes extends Activity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.icon:     
-		Toast.makeText(getApplicationContext(), "You pressed the icon!", Toast.LENGTH_LONG).show();
+            case R.id.icon:   
+		toastTxt("You pressed the icon!");  
                 break;
             case R.id.text:     
-		Toast.makeText(getApplicationContext(), "You pressed the text!", Toast.LENGTH_LONG).show();
+		toastTxt("You pressed the text!");  
                 break;
             case R.id.icontext: 
-			Toast.makeText(getApplicationContext(), "You pressed the icon and text!", Toast.LENGTH_LONG).show();
-                        break;
+		toastTxt("You pressed the icon and text!");  
+		break;
         }
         return true;
 
@@ -185,8 +189,8 @@ public class DroidRecipes extends Activity
 
 			String txt = edittext.getText().toString();
 
-			Toast.makeText(getApplicationContext(), "You pressed the Search button!"+txt, Toast.LENGTH_LONG).show();
-
+			
+			toastTxt("You searched for "+txt); 
 				Cursor curi = db.rawQuery("SELECT _id FROM recipes",null);
 			
 			 cur = db.rawQuery("SELECT _id, firstName, lastName, title FROM recipes WHERE firstName || ' ' || lastName LIKE ?", 
