@@ -6,47 +6,50 @@
     >
 
  <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+		
+>
 
     <EditText
         android:id="@+id/edittext"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="250px"
+        android:layout_height="wrap_content"
+	
+	
+/>
 
  <Button
 	android:id="@+id/searchtext"
+	android:layout_width="90px"
      android:layout_height="wrap_content"
-     android:layout_width="wrap_content"
+	       
+	android:onClick="searchEmploy" 
      android:text="@string/search"
-
+	 
  />
+
+
+
+</LinearLayout>
+
+   <AutoCompleteTextView 
+                android:id="@+id/list_autocomplete"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
 
    <ListView 
                 android:id="@+id/list"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"/>
-
-</LinearLayout>
+                android:layout_height="100px"/>
 
 <WebView
     android:id="@+id/MyWebview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 />
-</LinearLayout>
 
-<!--android:onClick="searchEmploy" 
- android:onClick="searchEmploy" 
-<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="test"
-    />
--->
-<!--
-     android:onClick="selfDestruct" />
--->
+</LinearLayout>
 
 

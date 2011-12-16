@@ -7,8 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-        public static final String DATABASE_NAME = "employee_directory";
-        
+        public static final String DATABASE_NAME = "recipes.db";
+        //private static final int DATABASE_VERSION = 2;
+
         public DataBaseHelper(Context context) {
                 super(context, DATABASE_NAME, null, 1);
         }
@@ -19,7 +20,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                  * Create the employee table and populate it with sample data.
                  * In step 6, we will move these hardcoded statements to an XML document.
                  */
-                String sql = "CREATE TABLE IF NOT EXISTS employee (" +
+		String tbl = "recipes";
+                String sql = "CREATE TABLE IF NOT EXISTS recipes (" +
                                                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
                                                 "firstName TEXT, " +
                                                 "lastName TEXT, " +
@@ -38,7 +40,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("officePhone", "617-219-2001");
                 values.put("cellPhone", "617-456-7890");
                 values.put("email", "jsmith@email.com");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
+
+                values.put("firstName", "John");
+                values.put("lastName", "Smith2");
+                values.put("title", "CEO");
+                values.put("officePhone", "617-219-2001");
+                values.put("cellPhone", "617-456-7890");
+                values.put("email", "jsmith@email.com");
+                db.insert(tbl, "lastName", values);
+
+                values.put("firstName", "John");
+                values.put("lastName", "Smith3");
+                values.put("title", "CEO");
+                values.put("officePhone", "617-219-2001");
+                values.put("cellPhone", "617-456-7890");
+                values.put("email", "jsmith@email.com");
+                db.insert(tbl, "lastName", values);
 
                 values.put("firstName", "Robert");
                 values.put("lastName", "Jackson");
@@ -47,7 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("cellPhone", "781-444-2222");
                 values.put("email", "rjackson@email.com");
                 values.put("managerId", "1");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
 
                 values.put("firstName", "Marie");
                 values.put("lastName", "Potter");
@@ -56,7 +74,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("cellPhone", "987-654-3210");
                 values.put("email", "mpotter@email.com");
                 values.put("managerId", "1");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
                 
                 values.put("firstName", "Lisa");
                 values.put("lastName", "Jordan");
@@ -65,7 +83,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("cellPhone", "987-654-7777");
                 values.put("email", "ljordan@email.com");
                 values.put("managerId", "2");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
 
                 values.put("firstName", "Christophe");
                 values.put("lastName", "Coenraets");
@@ -74,7 +92,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("cellPhone", "617-666-7777");
                 values.put("email", "ccoenrae@adobe.com");
                 values.put("managerId", "2");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
 
                 values.put("firstName", "Paula");
                 values.put("lastName", "Brown");
@@ -83,7 +101,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("cellPhone", "617-123-9876");
                 values.put("email", "pbrown@email.com");
                 values.put("managerId", "2");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
 
                 values.put("firstName", "Mark");
                 values.put("lastName", "Taylor");
@@ -92,13 +110,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values.put("cellPhone", "617-555-3344");
                 values.put("email", "mtaylor@email.com");
                 values.put("managerId", "2");
-                db.insert("employee", "lastName", values);
+                db.insert(tbl, "lastName", values);
                 
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                db.execSQL("DROP TABLE IF EXISTS employees");
+               
+		 db.execSQL("DROP TABLE IF EXISTS recipes");
                 onCreate(db);
         }
         

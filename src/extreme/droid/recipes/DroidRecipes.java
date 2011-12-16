@@ -2,8 +2,6 @@ package extreme.droid.recipes;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-
 import android.util.Log;
 
 import android.webkit.WebView;
@@ -31,12 +29,19 @@ import android.widget.ListAdapter;
 import android.widget.ArrayAdapter;
 
 import android.database.sqlite.SQLiteDatabase;
-
 import android.database.Cursor;
-import 	android.widget.SimpleCursorAdapter;
+
 import android.view.View.OnClickListener;
 import 	android.widget.Button;
 import java.lang.String;
+import	android.widget.SimpleCursorAdapter;
+import 	android.content.Intent;
+import android.app.ListActivity;
+
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
+////////////////////////////////////////////
+import android.widget.AutoCompleteTextView;
 
 public class DroidRecipes extends Activity
 {
@@ -46,94 +51,112 @@ public class DroidRecipes extends Activity
   	protected EditText searchText;
 	protected EditText edittext;
         protected SQLiteDatabase db;
-        protected Cursor cursor;
+        protected Cursor cur;
         protected ListAdapter adapter;
         protected ListView employeeList;
-
+	protected WebView webview;
+	protected ArrayAdapter<String> adapter2;
+	protected AutoCompleteTextView recipesList;
 ///////////////////////////////////////////////////
-
-	WebView webview;
-
-/*  myTextView = (TextView) this.findViewById(R.id.mytextview);
-      myTextView.setText(Html.fromHtml(getResources().getString(R.string.mystring)));
-*/
-	
-    /** Called when the activity is first created. */
-       
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-  db = (new DataBaseHelper(this)).getWritableDatabase();
-   
-//final EditText	searchText = (EditText) findViewById(R.id.edittext);
+	  db = (new DataBaseHelper(this)).getWritableDatabase();
+	///////////////////////////////////////////////////////////
 
+	       setContentView(R.layout.main);
 
-     
+	   employeeList = (ListView) findViewById (R.id.list);
 
-////////////////////////////////////////////
+	 webview = (WebView) findViewById(R.id.MyWebview);
 
+	loadHtmlData(getResources().getString(R.string.mystring));
 
+	edittext = (EditText) findViewById(R.id.edittext);
+/////////////////////////////////
+	String[] COUNTRIES = new String[] {"walk","testsw"};
+	
+	 recipesList = (AutoCompleteTextView) findViewById(R.id.list_autocomplete);
+	    adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, COUNTRIES);
+	    recipesList.setAdapter(adapter2);
 
-   employeeList = (ListView) findViewById (R.id.list);
+/////////////////////////////////////////////////////////////////////////////
+		final Button	searchTextBtn = (Button) findViewById(R.id.searchtext);
 
-/////////////////////////////////////////////////////////
+		employeeList.setOnItemClickListener(
+			new OnItemClickListener()
+			{
 
+			    @Override
+			    public void onItemClick(AdapterView<?> arg0, View view,
+				    int position, long id) {
 
-///////////////////////////////////////////////////////////
+				Toast.makeText(getApplicationContext(), "You pressed the icon and text!"+id, Toast.LENGTH_LONG).show();
 
-       setContentView(R.layout.main);
+				Cursor cur = (Cursor) adapter.getItem(position);
 
+				String selected_id = cur.getString(cur.getColumnIndex("_id"));
+				String txt = cur.getString(cur.getColumnIndex("title"));
+				loadHtmlData(selected_id+" "+txt);
+			    }   
+			}       
+		);
+//////////////////////////////////////////////////
+		recipesList.setOnItemClickListener(
+			new OnItemClickListener()
+			{
 
-	 WebView webview = (WebView) findViewById(R.id.MyWebview);
-	 String summary = "<html><body>";
+			    @Override
+			    public void onItemClick(AdapterView<?> arg0, View view,
+				    int position, long id) {
 
-	summary+=getResources().getString(R.string.mystring);
-	summary+="</body></html>";
+				Toast.makeText(getApplicationContext(), "Position "+id+" "+position, Toast.LENGTH_LONG).show();
+				
+			    }   
+			}       
+		);
+//////////////////////////////////////////////////////////////////////
 
+/*
+		edittext.setOnKeyListener(new OnKeyListener() {
+		    public boolean onKey(View v, int keyCode, KeyEvent event) {
+			// If the event is a key-down event on the "enter" button
+			if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+			    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+			  // Perform action on key press
+				String txt =  edittext.getText().toString();
+			  Toast.makeText(DroidRecipes.this, txt, Toast.LENGTH_SHORT).show();
+				loadHtmlData(txt);
+			  return true;
+			}
+			return false;
+		    }
+		});
+*/
 
-
-
-  //  ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, employees);
-    //    ListView employeeList = (ListView) findViewById(R.id.list);
-      //  employeeList.setAdapter(adapter);
-
-
-	 webview.loadData(summary, "text/html", "utf-8");
-/////////////////////////////////////////////////////////
-
-final EditText edittext = (EditText) findViewById(R.id.edittext);
-final Button	searchTextBtn = (Button) findViewById(R.id.searchtext);
-edittext.setOnKeyListener(new OnKeyListener() {
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
-        // If the event is a key-down event on the "enter" button
-        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-            (keyCode == KeyEvent.KEYCODE_ENTER)) {
-          // Perform action on key press
-          Toast.makeText(DroidRecipes.this, edittext.getText(), Toast.LENGTH_SHORT).show();
-          return true;
-        }
-        return false;
-    }
-});
-
-
-searchTextBtn.setOnClickListener(new OnClickListener() { public void onClick (View v){ 
-
-	Toast.makeText(DroidRecipes.this, "You pressed the Search button!"+edittext.getText().toString(), Toast.LENGTH_LONG).show();
-
-	String x = "55";
-
-}});
-
+/*
+		searchTextBtn.setOnClickListener(new OnClickListener() { public void onClick (View v){ 
+			String txt = edittext.getText().toString();
+		}});
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////
     }
 
+	public void loadHtmlData(String info) {
+
+		String summary = "<html><body>";
+		summary+=info;
+		summary+="</body></html>";
+		webview.loadData(summary, "text/html", "utf-8");
+
+	}
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
@@ -141,43 +164,66 @@ searchTextBtn.setOnClickListener(new OnClickListener() { public void onClick (Vi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.icon:     
-		Toast.makeText(this, "You pressed the icon!", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "You pressed the icon!", Toast.LENGTH_LONG).show();
                 break;
             case R.id.text:     
-		Toast.makeText(this, "You pressed the text!", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "You pressed the text!", Toast.LENGTH_LONG).show();
                 break;
             case R.id.icontext: 
-			Toast.makeText(this, "You pressed the icon and text!", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "You pressed the icon and text!", Toast.LENGTH_LONG).show();
                         break;
         }
         return true;
+
     }
 
-/*
+
     public void searchEmploy(View view) {
 
-	Toast.makeText(this, "You pressed the Search button!"+edittext.getText().toString(), Toast.LENGTH_LONG).show();
-        // || is the concatenation operation in SQLite
-		
-		
+			String txt = edittext.getText().toString();
 
+			Toast.makeText(getApplicationContext(), "You pressed the Search button!"+txt, Toast.LENGTH_LONG).show();
 
-
-
-               cursor = db.rawQuery("SELECT _id, firstName, lastName, title FROM employee WHERE firstName || ' ' || lastName LIKE ?", 
-                                                new String[]{"%" + searchText.getText().toString() + "%"});
-                adapter = new SimpleCursorAdapter(
-                                this, 
+				Cursor curi = db.rawQuery("SELECT _id FROM recipes",null);
+			
+			 cur = db.rawQuery("SELECT _id, firstName, lastName, title FROM recipes WHERE firstName || ' ' || lastName LIKE ?", 
+                                                new String[]{"%" + txt + "%"});
+			    adapter = new SimpleCursorAdapter(
+                                DroidRecipes.this, 
                                 R.layout.employee_list_item, 
-                                cursor, 
-                                new String[] {"firstName", "lastName", "title"}, 
-                                new int[] {R.id.firstName, R.id.lastName, R.id.title});
-                employeeList.setAdapter(adapter);
+                                cur, 
+                                new String[] {"firstName","lastName","title"}, 
+                                new int[] {R.id.firstName,R.id.lastName,R.id.title});
+			
+               		 employeeList.setAdapter(adapter);
+
+			String ids = "";
+
+			Integer counts = cur.getCount();
+			 if (counts > 0) {
+
+				Integer x = 0;
+				String[] RECIPES = new String[counts];
+			    while (cur.moveToNext()) {
+				ids+= cur.getString(cur.getColumnIndex("firstName"));
+				RECIPES[x] = cur.getString(cur.getColumnIndex("firstName"))+" "+cur.getString(cur.getColumnIndex("lastName"));
+				x++;
+		 	        }
+				
+				 adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
+				    recipesList.setAdapter(adapter2);
+
+			    }
+			
+			  
+			String summary="walk re walk"+ids+curi.getCount();
+			loadHtmlData(summary);
 
 		
     }
 
-*/
+
 }
