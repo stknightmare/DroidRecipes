@@ -1,8 +1,9 @@
-/home/programming/android/DroidRecipesProject/bin/DroidRecipes.ap_ \
- : /home/programming/android/DroidRecipesProject/res/drawable/icon.png \
-/home/programming/android/DroidRecipesProject/res/values/strings.xml \
-/home/programming/android/DroidRecipesProject/res/layout/main.xml \
-/home/programming/android/DroidRecipesProject/res/layout/employee_list_item.xml \
-/home/programming/android/DroidRecipesProject/res/menu/menu.xml \
-/home/programming/android/DroidRecipesProject/bin/res/drawable/icon.png \
-/home/programming/android/DroidRecipesProject/AndroidManifest.xml \
+/home/programming/androids/DroidRecipes/bin/DroidRecipes.ap_ \
+ : /home/programming/androids/DroidRecipes/res/layout/main.xml \
+/home/programming/androids/DroidRecipes/res/layout/employee_list_item.xml \
+/home/programming/androids/DroidRecipes/res/menu/menu.xml \
+/home/programming/androids/DroidRecipes/res/drawable/icon.png \
+/home/programming/androids/DroidRecipes/res/values/strings.xml \
+/home/programming/androids/DroidRecipes/bin/res/drawable/icon.png \
+/home/programming/androids/DroidRecipes/assets/navaroni.db \
+/home/programming/androids/DroidRecipes/AndroidManifest.xml \
