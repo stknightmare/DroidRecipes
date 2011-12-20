@@ -62,7 +62,7 @@ public class DroidRecipes extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+	
 	  db = (new DataBaseHelper(this)).getWritableDatabase();
 	///////////////////////////////////////////////////////////
 
@@ -72,7 +72,7 @@ public class DroidRecipes extends Activity
 
 	 webview = (WebView) findViewById(R.id.MyWebview);
 
-	loadHtmlData(getResources().getString(R.string.mystring));
+	loadHtmlData(getApplicationContext().getString(R.string.mystring));
 
 	edittext = (EditText) findViewById(R.id.edittext);
 /////////////////////////////////
@@ -144,6 +144,11 @@ public class DroidRecipes extends Activity
 
 ////////////////////////////////////////////////////////////////////////////////////////
     }
+/*
+	public String getResourcesValue(String txt) {
+		return this.getResources().getString(txt);
+	}
+*/
 
 	public void toastTxt(String txt) {
 		Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
@@ -188,7 +193,7 @@ public class DroidRecipes extends Activity
     public void searchEmploy(View view) {
 
 			String txt = edittext.getText().toString();
-
+				Log.i("SEARCHING","search for "+txt);
 			
 			toastTxt("You searched for "+txt); 
 				Cursor curi = db.rawQuery("SELECT _id FROM recipes",null);

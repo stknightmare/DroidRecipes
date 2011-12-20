@@ -4,14 +4,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
         public static final String DATABASE_NAME = "recipes.db";
-        //private static final int DATABASE_VERSION = 2;
+        private static final int DATABASE_VERSION = 1;
+	public static final String tbl = "recipes";
+	
+	
 
         public DataBaseHelper(Context context) {
-                super(context, DATABASE_NAME, null, 1);
+                super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
         @Override
@@ -20,7 +24,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                  * Create the employee table and populate it with sample data.
                  * In step 6, we will move these hardcoded statements to an XML document.
                  */
-		String tbl = "recipes";
+	//	String tbl = "recipes";
                 String sql = "CREATE TABLE IF NOT EXISTS recipes (" +
                                                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
                                                 "firstName TEXT, " +
@@ -116,10 +120,43 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-               
-		 db.execSQL("DROP TABLE IF EXISTS recipes");
-                onCreate(db);
+
+		Log.i("DATABASES","ov "+oldVersion+" nv "+newVersion);
+
+                for (int i = oldVersion+1; i <= newVersion; i++) {
+		Log.i("DATABASES","Updating to" + i);
+			  switch (i) {
+					
+            			case 2:
+					
+					upgradeToVersion2(db);
+					break;	
+				/*case 3:
+					
+					upgradeToVersion3(db);
+					break;	
+				case 4:
+					
+					upgradeToVersion2(db);
+					break;	*/
+			}
+			
+		}
+
+		// db.execSQL("DROP TABLE IF EXISTS recipes");
+               // onCreate(db);
         }
+
+//////////////////////////////
+///version2
+public void upgradeToVersion2(SQLiteDatabase db) {
+		 db.execSQL("CREATE TABLE fortnights ( " +
+						"first_day DATE PRIMARY KEY" +
+						")");
+		Log.i("UPGRADE","create");
+}
+
+/////////////////////////////////////////////////
         
 }
 
