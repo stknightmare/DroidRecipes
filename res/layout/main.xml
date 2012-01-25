@@ -12,32 +12,21 @@
 		
 >
 
-    <EditText
-        android:id="@+id/edittext"
-        android:layout_width="250px"
-        android:layout_height="wrap_content"
-	
-	
-/>
+   <AutoCompleteTextView 
+                android:id="@+id/list_autocomplete"
+                android:layout_width="250px"
+                android:layout_height="wrap_content"/>
 
  <Button
-	android:id="@+id/searchtext"
+	android:id="@+id/updatetext"
 	android:layout_width="90px"
      android:layout_height="wrap_content"
-	       
-	android:onClick="searchEmploy" 
+	android:onClick="updateRecipe"  	
      android:text="@string/search"
 	 
  />
 
-
-
-</LinearLayout>
-
-   <AutoCompleteTextView 
-                android:id="@+id/list_autocomplete"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+ </LinearLayout>
 
    <ListView 
                 android:id="@+id/list"

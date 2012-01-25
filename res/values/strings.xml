@@ -2,15 +2,10 @@
 <resources>
     <string name="app_name">E-Suntages</string>
    <string name="databaseVersion" >2</string>
-
  <string name="search">Search</string>
  <string name="help">Help</string>
    <string name="mystring">    
-        You can use regular text, and escaped HTML markup
-        &lt;br /&gt;
-	* test &lt;br /&gt;
-	* test &lt;br /&gt;
-        A simple BOLD example &lt;b&gt;StackOverflow&lt;/b&gt;.
+Καλώς ήρθατε.
     </string>
 
 </resources>

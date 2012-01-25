@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+//import android.webkit.WebViewClient;
 
 //Menu
 import android.view.Menu;
@@ -19,11 +19,11 @@ import android.widget.Toast;
 //Viewjoh
 import 	android.view.View;
 //EditText
-import android.widget.EditText;
+//import android.widget.EditText;
 
 //OnKeyListener
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+//import android.view.View.OnKeyListener;
+//import android.view.KeyEvent;
 import 	android.widget.ListView;
 import android.widget.ListAdapter;
 import android.widget.ArrayAdapter;
@@ -31,12 +31,12 @@ import android.widget.ArrayAdapter;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 
-import android.view.View.OnClickListener;
+import  android.view.View.OnClickListener;
 import 	android.widget.Button;
-import java.lang.String;
+import  java.lang.String;
 import	android.widget.SimpleCursorAdapter;
-import 	android.content.Intent;
-import android.app.ListActivity;
+//import 	android.content.Intent;
+//import  android.app.ListActivity;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
@@ -47,9 +47,8 @@ public class DroidRecipes extends Activity
 {
 
 //////////////////////////
-	public Button searchTextBtn;
-  	protected EditText searchText;
-	protected EditText edittext;
+  	//protected EditText searchText;
+
         protected SQLiteDatabase db;
         protected Cursor cur;
         protected ListAdapter adapter;
@@ -57,6 +56,7 @@ public class DroidRecipes extends Activity
 	protected WebView webview;
 	protected ArrayAdapter<String> adapter2;
 	protected AutoCompleteTextView recipesList;
+	public String[] RECIPESCONTENT;
 ///////////////////////////////////////////////////
 
     @Override
@@ -74,16 +74,14 @@ public class DroidRecipes extends Activity
 
 	loadHtmlData(getApplicationContext().getString(R.string.mystring));
 
-	edittext = (EditText) findViewById(R.id.edittext);
 /////////////////////////////////
-	String[] COUNTRIES = new String[] {"walk","testsw"};
+	String[] RECIPES = new String[] {"toursi","piklakia"};
 	
 	 recipesList = (AutoCompleteTextView) findViewById(R.id.list_autocomplete);
-	    adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, COUNTRIES);
+	    adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
 	    recipesList.setAdapter(adapter2);
 
 /////////////////////////////////////////////////////////////////////////////
-		final Button	searchTextBtn = (Button) findViewById(R.id.searchtext);
 
 		employeeList.setOnItemClickListener(
 			new OnItemClickListener()
@@ -93,17 +91,17 @@ public class DroidRecipes extends Activity
 			    public void onItemClick(AdapterView<?> arg0, View view,
 				    int position, long id) {
 
-				
-				toastTxt("You pressed the icon and text!"+id);
 				Cursor cur = (Cursor) adapter.getItem(position);
 
-				String selected_id = cur.getString(cur.getColumnIndex("_id"));
+				//String selected_id = cur.getString(cur.getColumnIndex("_id"));
 				String txt = cur.getString(cur.getColumnIndex("title"));
-				loadHtmlData(selected_id+" "+txt);
+				String recipe = cur.getString(cur.getColumnIndex("recipe"));
+				//loadHtmlData(" <b>"+txt+"</b><br />"+recipe);
+				loadRecipeData(txt,recipe);
 			    }   
 			}       
 		);
-//////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 		recipesList.setOnItemClickListener(
 			new OnItemClickListener()
 			{
@@ -111,30 +109,14 @@ public class DroidRecipes extends Activity
 			    @Override
 			    public void onItemClick(AdapterView<?> arg0, View view,
 				    int position, long id) {
-				toastTxt("Position "+id+" "+position);
-				
+
+				loadHtmlData(RECIPESCONTENT[position]);
 				
 			    }   
 			}       
 		);
-//////////////////////////////////////////////////////////////////////
 
-/*
-		edittext.setOnKeyListener(new OnKeyListener() {
-		    public boolean onKey(View v, int keyCode, KeyEvent event) {
-			// If the event is a key-down event on the "enter" button
-			if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-			    (keyCode == KeyEvent.KEYCODE_ENTER)) {
-			  // Perform action on key press
-				String txt =  edittext.getText().toString();
-				toastTxt(txt);
-				loadHtmlData(txt);
-			  return true;
-			}
-			return false;
-		    }
-		});
-*/
+//////////////////////////////////////////////////////////////////////
 
 /*
 		searchTextBtn.setOnClickListener(new OnClickListener() { public void onClick (View v){ 
@@ -144,19 +126,18 @@ public class DroidRecipes extends Activity
 
 ////////////////////////////////////////////////////////////////////////////////////////
     }
-/*
-	public String getResourcesValue(String txt) {
-		return this.getResources().getString(txt);
-	}
-*/
-
 	public void toastTxt(String txt) {
 		Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
+	}
+	
+	public void loadRecipeData(String title,String recipe) {
+		
+		loadHtmlData(" <b>"+title+"</b><br />"+recipe);
 	}
 
 	public void loadHtmlData(String info) {
 
-		String summary = "<html><body>";
+		String summary = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body>";
 		summary+=info;
 		summary+="</body></html>";
 		webview.loadData(summary, "text/html", "utf-8");
@@ -189,50 +170,49 @@ public class DroidRecipes extends Activity
 
     }
 
+	public void updateRecipesList(String txt) {
 
-    public void searchEmploy(View view) {
+			cur = db.rawQuery("SELECT _id, title,recipe FROM recipes WHERE title LIKE ?", 
+                                               new String[]{"%" + txt + "%"});
 
-			String txt = edittext.getText().toString();
-				Log.i("SEARCHING","search for "+txt);
-			
-			toastTxt("You searched for "+txt); 
-				Cursor curi = db.rawQuery("SELECT _id FROM recipes",null);
-			
-			 cur = db.rawQuery("SELECT _id, firstName, lastName, title FROM recipes WHERE firstName || ' ' || lastName LIKE ?", 
-                                                new String[]{"%" + txt + "%"});
-			    adapter = new SimpleCursorAdapter(
+			  adapter = new SimpleCursorAdapter(
                                 DroidRecipes.this, 
-                                R.layout.employee_list_item, 
+                                R.layout.recipe_list_item, 
                                 cur, 
-                                new String[] {"firstName","lastName","title"}, 
-                                new int[] {R.id.firstName,R.id.lastName,R.id.title});
+                                new String[] {"title","recipe"}, 
+                                new int[] {R.id.title,R.id.recipe});
 			
                		 employeeList.setAdapter(adapter);
-
-			String ids = "";
 
 			Integer counts = cur.getCount();
 			 if (counts > 0) {
 
 				Integer x = 0;
 				String[] RECIPES = new String[counts];
+				RECIPESCONTENT = new String[counts];
+
 			    while (cur.moveToNext()) {
-				ids+= cur.getString(cur.getColumnIndex("firstName"));
-				RECIPES[x] = cur.getString(cur.getColumnIndex("firstName"))+" "+cur.getString(cur.getColumnIndex("lastName"));
-				x++;
+						
+						
+						RECIPES[x] = cur.getString(cur.getColumnIndex("title"));
+						RECIPESCONTENT[x] = cur.getString(cur.getColumnIndex("recipe"));
+				
+						x++;
 		 	        }
 				
 				 adapter2 = new ArrayAdapter<String>(this, R.layout.list_item, RECIPES);
 				    recipesList.setAdapter(adapter2);
+			}
+	}
 
-			    }
+	public void updateRecipe(View view) {
+
+			String txt = recipesList.getText().toString();
 			
-			  
-			String summary="walk re walk"+ids+curi.getCount();
-			loadHtmlData(summary);
+			this.updateRecipesList(txt);
 
-		
-    }
+			toastTxt("You searched for "+txt); 
 
+	}
 
 }

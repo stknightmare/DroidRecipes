@@ -20,101 +20,69 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-                /*
-                 * Create the employee table and populate it with sample data.
-                 * In step 6, we will move these hardcoded statements to an XML document.
-                 */
-	//	String tbl = "recipes";
+
                 String sql = "CREATE TABLE IF NOT EXISTS recipes (" +
-                                                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-                                                "firstName TEXT, " +
-                                                "lastName TEXT, " +
-                                                "title TEXT, " +
-                                                "officePhone TEXT, " +
-                                                "cellPhone TEXT, " +
-                                                "email TEXT, " +
-                                                "managerId INTEGER)";
+                                                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +                                                 
+                                                "title TEXT, " +              
+                                                
+						"recipe TEXT " +
+                                                ")";
                 db.execSQL(sql);
                 
                 ContentValues values = new ContentValues();
 
-                values.put("firstName", "John");
-                values.put("lastName", "Smith");
-                values.put("title", "CEO");
-                values.put("officePhone", "617-219-2001");
-                values.put("cellPhone", "617-456-7890");
-                values.put("email", "jsmith@email.com");
-                db.insert(tbl, "lastName", values);
+                String title = "title";
 
-                values.put("firstName", "John");
-                values.put("lastName", "Smith2");
-                values.put("title", "CEO");
-                values.put("officePhone", "617-219-2001");
-                values.put("cellPhone", "617-456-7890");
-                values.put("email", "jsmith@email.com");
-                db.insert(tbl, "lastName", values);
+                values.put("title", "Arnaki");
+		values.put("recipe", "arnaki frikase");
+                db.insert(tbl, title, values);
 
-                values.put("firstName", "John");
-                values.put("lastName", "Smith3");
-                values.put("title", "CEO");
-                values.put("officePhone", "617-219-2001");
-                values.put("cellPhone", "617-456-7890");
-                values.put("email", "jsmith@email.com");
-                db.insert(tbl, "lastName", values);
+             
+                values.put("title", "mpamies");
+             	values.put("recipe", "mpamies giaxni");
+                db.insert(tbl, title, values);
 
-                values.put("firstName", "Robert");
-                values.put("lastName", "Jackson");
-                values.put("title", "VP Engineering");
-                values.put("officePhone", "617-219-3333");
-                values.put("cellPhone", "781-444-2222");
-                values.put("email", "rjackson@email.com");
-                values.put("managerId", "1");
-                db.insert(tbl, "lastName", values);
+             
+                values.put("title", "arnaki");
+             	values.put("recipe", "arnaki galaktos");
+                db.insert(tbl, title, values);
 
-                values.put("firstName", "Marie");
-                values.put("lastName", "Potter");
-                values.put("title", "VP Sales");
-                values.put("officePhone", "617-219-2002");
-                values.put("cellPhone", "987-654-3210");
-                values.put("email", "mpotter@email.com");
-                values.put("managerId", "1");
-                db.insert(tbl, "lastName", values);
+                values.put("title", "arnaki");
+             	values.put("recipe", "arnaki sth gastra");
+		db.insert(tbl, title, values);
+
+                values.put("title", "batraxopodara");
+                values.put("recipe", "batraxopodara sto fourno");
+                db.insert(tbl, title, values);
                 
-                values.put("firstName", "Lisa");
-                values.put("lastName", "Jordan");
-                values.put("title", "VP Marketing");
-                values.put("officePhone", "617-219-2003");
-                values.put("cellPhone", "987-654-7777");
-                values.put("email", "ljordan@email.com");
-                values.put("managerId", "2");
-                db.insert(tbl, "lastName", values);
+                values.put("title", "batraxopodara");
+               	values.put("recipe", "batraxopodara sto tsoukali");
+                db.insert(tbl, title, values);
 
-                values.put("firstName", "Christophe");
-                values.put("lastName", "Coenraets");
-                values.put("title", "Evangelist");
-                values.put("officePhone", "617-219-0000");
-                values.put("cellPhone", "617-666-7777");
-                values.put("email", "ccoenrae@adobe.com");
-                values.put("managerId", "2");
-                db.insert(tbl, "lastName", values);
+              
+                values.put("title", "batraxopodara");
+              	values.put("recipe", "batraxopodara sto container");
+                db.insert(tbl, title, values);
 
-                values.put("firstName", "Paula");
-                values.put("lastName", "Brown");
-                values.put("title", "Director Engineering");
-                values.put("officePhone", "617-612-0987");
-                values.put("cellPhone", "617-123-9876");
-                values.put("email", "pbrown@email.com");
-                values.put("managerId", "2");
-                db.insert(tbl, "lastName", values);
+                values.put("title", "arnaki");
+              	values.put("recipe", "arnaki fournou");
+                db.insert(tbl, title, values);
 
-                values.put("firstName", "Mark");
-                values.put("lastName", "Taylor");
-                values.put("title", "Lead Architect");
-                values.put("officePhone", "617-444-1122");
-                values.put("cellPhone", "617-555-3344");
-                values.put("email", "mtaylor@email.com");
-                values.put("managerId", "2");
-                db.insert(tbl, "lastName", values);
+                values.put("title", "arnaki");
+              	values.put("recipe", "kai allo arnaki fournou");
+                db.insert(tbl, title, values);
+
+		values.put("title", "arnaki gastras");
+              	values.put("recipe", "kai allo arnaki fournou gastras");
+                db.insert(tbl, title, values);
+	
+		values.put("title", "arnaki gastras kalo");
+              	values.put("recipe", "kai allo arnaki fournou gastras kalh geush");
+                db.insert(tbl, title, values);
+
+		values.put("title", "αρνάκι γάστρας καλό");
+              	values.put("recipe", "αρνάκι γάστρας καλό, καλή γεύση.");
+                db.insert(tbl, title, values);
                 
         }
 
