@@ -2,7 +2,9 @@
 	<item android:id="@+id/icon"
 	    android:icon="@drawable/icon" />
 	<item android:id="@+id/text"
-	    android:title="Text" />
+	    android:title="Text" />\
+		<item android:id="@+id/prefs"
+	    android:title="Preferences" />
     <item android:id="@+id/icontext"
         android:title="Icon and text"
         android:icon="@drawable/icon" />

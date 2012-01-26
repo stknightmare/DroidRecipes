@@ -35,13 +35,16 @@ import  android.view.View.OnClickListener;
 import 	android.widget.Button;
 import  java.lang.String;
 import	android.widget.SimpleCursorAdapter;
-//import 	android.content.Intent;
+import 	android.content.Intent;
 //import  android.app.ListActivity;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 ////////////////////////////////////////////
 import android.widget.AutoCompleteTextView;
+////////////////preferences
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
 
 public class DroidRecipes extends Activity
 {
@@ -65,7 +68,12 @@ public class DroidRecipes extends Activity
 	
 	  db = (new DataBaseHelper(this)).getWritableDatabase();
 	///////////////////////////////////////////////////////////
-
+	SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+	//String            enabled = sharedPrefs.getString("EnablePreferences", null);
+	String            enabled2 = sharedPrefs.getString("Name", null);
+	String            enabled3 = sharedPrefs.getString("DayOfWeek", null);
+	//toastTxt(enabled+" "+enabled2+" "+enabled3);
+	toastTxt(enabled2+" "+enabled3);
 	       setContentView(R.layout.main);
 
 	   employeeList = (ListView) findViewById (R.id.list);
@@ -165,6 +173,9 @@ public class DroidRecipes extends Activity
             case R.id.icontext: 
 		toastTxt("You pressed the icon and text!");  
 		break;
+	    case R.id.prefs: 
+		showPreferences();  
+		break;
         }
         return true;
 
@@ -214,5 +225,12 @@ public class DroidRecipes extends Activity
 			toastTxt("You searched for "+txt); 
 
 	}
+
+    public boolean showPreferences(){
+        Intent intent = new Intent(this, DroidRecipesPreferences.class);
+        startActivity(intent);
+        return true;
+
+    }
 
 }
