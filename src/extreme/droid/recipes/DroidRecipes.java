@@ -69,10 +69,10 @@ public class DroidRecipes extends Activity
 	  db = (new DataBaseHelper(this)).getWritableDatabase();
 	///////////////////////////////////////////////////////////
 	SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-	//String            enabled = sharedPrefs.getString("EnablePreferences", null);
+	
 	String            enabled2 = sharedPrefs.getString("Name", null);
 	String            enabled3 = sharedPrefs.getString("DayOfWeek", null);
-	//toastTxt(enabled+" "+enabled2+" "+enabled3);
+	
 	toastTxt(enabled2+" "+enabled3);
 	       setContentView(R.layout.main);
 
